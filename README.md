@@ -1,10 +1,10 @@
-# CSV Interpolation CLI
+# CSV Interpolation Tool
 
 Python command line interface (CLI) tool to replace 'nan's in '.csv' files with the average of their neighbours.
 
 ## Installation
 
-This package can be installed into your local `Python` environment using `pip` or into an isolated virtual environment with `pipx`. During development I used the `uv` Python project managament software, which allows fast environment creation/management. With `uv` installed you can get the CLI in the same state as I had during development by runnning these commands in the project root directory:
+This package can be installed into your local `Python` environment using `pip` or into an isolated virtual environment with `pipx`. During development I used the [`uv` Python project manager](https://github.com/astral-sh/uv), which allows fast environment creation/management. With `uv` installed you can get the CLI in the same state as I had during development by runnning these commands in the project root directory:
 
 ```bash
 uv sync
