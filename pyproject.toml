@@ -1,7 +1,7 @@
 [project]
 name = "csv-interpolate"
 version = "0.1.0"
-description = "Add your description here"
+description = "CLI to interpolate provided '.csv' files, replacing 'nan' with their neighbour's average."
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
@@ -11,7 +11,6 @@ dependencies = [
     "numba>=0.60.0",
     "scipy>=1.14.1",
     "click>=8.1.7",
-    "pipx>=1.7.1",
 ]
 
 [project.scripts]
