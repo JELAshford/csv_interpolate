@@ -35,11 +35,7 @@ def interpolate_convolve(matrix):
 
 if __name__ == "__main__":
     # Run basic benchmarking
-    DATA_DIR = "../interpolation/example_data/"
-    IN_MATRIX = np.loadtxt(f"{DATA_DIR}input_test_data.csv", delimiter=",")
-    SAMPLE_OUT_MATRIX = np.loadtxt(
-        f"{DATA_DIR}/interpolated_test_data.csv", delimiter=","
-    )
+    IN_MATRIX = np.loadtxt("rsc/input_test_data.csv", delimiter=",")
 
     # Run functions once for warmup/JIT compile
     warmup_matrix = np.tile(IN_MATRIX, (5, 5))
@@ -48,6 +44,9 @@ if __name__ == "__main__":
 
     # Run `timeit` testing on larger matrices
     run_params = {"globals": locals(), "number": 1000}
-    test_matrix = np.tile(IN_MATRIX, (20, 20))
-    print(timeit.timeit("interpolate_at_nans(test_matrix)", **run_params))
-    print(timeit.timeit("interpolate_convolve(test_matrix)", **run_params))
+    test_matrix = np.tile(IN_MATRIX, (50, 50))
+    iterated_time = timeit.timeit("interpolate_at_nans(test_matrix)", **run_params)
+    convolve_time = timeit.timeit("interpolate_convolve(test_matrix)", **run_params)
+    print(f"Numba: {iterated_time:.2f}s")
+    print(f"Convolve: {convolve_time:.2f}s")
+    print(f"Numba speedup: {convolve_time/iterated_time:.2f}x")
