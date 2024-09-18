@@ -18,8 +18,10 @@ def interpolate_at_nans(matrix: np.ndarray):
     """
     out_matrix = matrix.copy()
     height, width = matrix.shape
+    # Iterate over all 'nan' locations
     nan_locations = np.argwhere(np.isnan(matrix))
     for y, x in nan_locations:
+        # Count number of and sum all valid neighbour values
         neighbour_sum, count = 0, 0
         for y_off, x_off in ((0, -1), (0, 1), (-1, 0), (1, 0)):
             y_prime = y + y_off
@@ -27,7 +29,9 @@ def interpolate_at_nans(matrix: np.ndarray):
             if (0 <= y_prime < height) and (0 <= x_prime < width):
                 neighbour_sum += matrix[y_prime, x_prime]
                 count += 1
-        out_matrix[y, x] = neighbour_sum / count
+        # Store average in the output if enough values available
+        if count > 0:
+            out_matrix[y, x] = neighbour_sum / count
     return out_matrix
 
 
