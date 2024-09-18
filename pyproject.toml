@@ -5,9 +5,17 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "numpy>=2.1.1",
-    "pytest>=8.3.3",
+    "numpy<2",
+    "llvmlite>=0.43.0",
+    "setuptools>=74.1.2",
+    "numba>=0.60.0",
+    "scipy>=1.14.1",
+    "click>=8.1.7",
+    "pipx>=1.7.1",
 ]
+
+[project.scripts]
+interpolate = "csv_interpolate.cli:interpolate"
 
 [build-system]
 requires = ["hatchling"]
