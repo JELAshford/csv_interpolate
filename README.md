@@ -39,13 +39,13 @@ Options:
 
 ## Method Notes
 
-The simplest and most flexible approach to solving this problem is through convolution, using the `scipy` convolution methods on `numpy` arrays containing the matrix data. This method is the CLI default and the most generalisable, as it is update the code with different neighbourhood kernels or add features such as 'wrapping' around the edge of the matrix.
+The simplest and most flexible approach to solving this problem is through convolution, using the `scipy` convolution method on a `numpy` array containing the matrix data. This method is the CLI default and the most generalisable, as it is easy to update the code with different neighbourhood kernels or add features such as 'wrapping' around the edges of the matrix.
 
 I have also written an alternative method that individually finds and replaces the 'nan' values in the matrix, which I have accelerated with JIT compilation throught the `numba` library. This method is ~5-10x faster than the full convolutional method, likely as the number of 'nan' values is low in the examples resulting in less work to do compared to the full array convolution. Additionally, this method is less flexible and requires the installation of more packages.
 
-If this was being taken to production, it would be important to discuss usual use-cases with other members of the team and benchmark the method on arrays of different sizes and sparsity of 'nan's to decide which method to use as the default. Alternatively, if the performance of the algorithm depended heavily of the sparsity of the input matrix, this could first be calculated then the most appropriate algorithm applied.
+To prioritise generalisability the convolution method is the default solution. However, it would be interesting to discuss usual use-cases with other members of the team and benchmark the method on arrays of different sizes and sparsity of 'nan's to decide whether a change of method would be more effective. Additionally, if the performance of the algorithm depended heavily of the sparsity of the input matrix, this could first be calculated then the most appropriate algorithm applied.
 
-The timings for each method can be seen by running:
+The benchmark timings for each method can be seen by running:
 
 ```bash
 uv run src/csv_interpolate/interp_methods.py
