@@ -5,7 +5,17 @@ import timeit
 
 
 @njit
-def interpolate_at_nans(matrix):
+def interpolate_at_nans(matrix: np.ndarray):
+    """Iterate over all 'nan' positions in the input matrix and replace those
+    values with the average of all non-'nan' values in the Von Neumann neighbourhood
+    around it.
+
+    Args:
+        matrix (np.ndarray): Input 2D matrix
+
+    Returns:
+        out_matrix (np.ndarray): Output 2D matrix with interpolated values
+    """
     out_matrix = matrix.copy()
     height, width = matrix.shape
     nan_locations = np.argwhere(np.isnan(matrix))
@@ -22,6 +32,15 @@ def interpolate_at_nans(matrix):
 
 
 def interpolate_convolve(matrix):
+    """Convolve over the input array to count the number and sum of neighbours in
+    given neighbourhood, replacing all 'nan's with the neighbour average.
+
+    Args:
+        matrix (np.ndarray): Input 2D matrix
+
+    Returns:
+        matrix (np.ndarray): Output 2D matrix with interpolated values
+    """
     neighbourhood = np.array([[0, 1, 0], [1, 0, 1], [0, 1, 0]])
     nan_mask = np.isnan(matrix)
     # Count neighbour sum and number of active neighbours
